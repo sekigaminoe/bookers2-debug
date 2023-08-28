@@ -4,7 +4,7 @@ class Book < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
 
-  has_one_attached :profile_image
+  # has_one_attached :profile_image
 
 
   validates :title,presence:true
