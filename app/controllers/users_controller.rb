@@ -27,17 +27,30 @@ class UsersController < ApplicationController
     else
       render "edit"
     end
+  end
 
-    def follows
-      user = User.find(params[:id])
-      @users = user.followings
-    end
+  def follows
+    user = User.find(params[:id])
+    @users = user.followings
+  end
 
-    def followers
-      user = User.find(params[:id])
-      @user = user.followers
+  def followers
+    user = User.find(params[:id])
+    @user = user.followers
+  end
+
+  def search
+    @user = User.find(params[:user_id])
+    @books = @user.books
+    @book = Book.new
+    if params[:created_at] == ""
+      @search_book = "日付を選択してください"
+    else
+      create_at = params[:created_at]
+      @search_book = @books.where(['created_at LIKE ?', "#{create_at}%"]).count
     end
   end
+
 
   private
 
