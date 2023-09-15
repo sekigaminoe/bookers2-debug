@@ -10,7 +10,7 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
     if @group.save
-      redirect_to groups_path, method: :post
+      redirect_to groups_path
     else
       render :new
     end
@@ -19,7 +19,7 @@ class GroupsController < ApplicationController
   def show
     @book = Book.new
     @group = Group.find(params[:id])
-    @user = User.find(params[:id])
+    @user = User.find(current_user.id)
   end
 
   def index
