@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get "followers" => "relationships#followers", as: "followers"
     get "search" => "users#search"
   end
-  
+
   devise_scope :user do
     post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
   end
@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 
   resources :groups, only: [:new,:index,:show,:create,:edit,:update] do
     resource :group_users, only: [:create,:destroy]
+    get "new/mail" => "groups#new_mail"
+    get "send/mail" => "groups#send_mail"
   end
 
 end
